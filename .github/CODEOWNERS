@@ -1,0 +1,20 @@
+# This is a comment.
+# Each line is a file pattern followed by one or more owners.
+
+# Code Owners for a file
+# filename @username1 @username2
+
+# Code Owners for a directory
+# directoryname/ @username1 @username2
+
+# All group members as Code Owners for a file
+# filename @groupname
+
+# All group members as Code Owners for a directory
+# directoryname/ @groupname
+
+# These owners will be the default owners for everything in
+# the repo. Unless a later match takes precedence,
+# @ryariyaz and @mohidem will be requested for
+# review when someone opens a pull request.
+*       @ryariyaz @mohidem
