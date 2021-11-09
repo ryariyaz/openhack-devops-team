@@ -1,7 +1,7 @@
 # This is a comment.
 # Each line is a file pattern followed by one or more owners.
 
-# Basic Code owner template
+# Basic Code owner file
 # Code Owners for a file
 # filename @username1 @username2
 
