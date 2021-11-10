@@ -78,9 +78,9 @@ jobs:
     - name: Azure CLI Start Staging Slot
       uses: Azure/CLI@v1
       with:
-       azcliversion: 2.0.72
-       inlineScript: az account set -s 41532995-2c47-488e-9879-0f0046077202 az webapp start --name $webapp_name --resource-group $resource_group --slot staging
-       #inlineScript: az webapp start --name $webapp_name --resource-group $resource_group --slot staging
+       azcliversion: 2.0.31
+       #inlineScript: az account set -s 41532995-2c47-488e-9879-0f0046077202
+       inlineScript: az webapp start --name $webapp_name --resource-group $resource_group --slot staging
        
       
     - name: Azure WebApp
