@@ -1,56 +1,33 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
+- name: Setup .NET Core
+uses: actions/setup-dotnet@v1
+with:
+dotnet-version: '3.1.202'
+- name: Add Code Coverage Tools
+working-directory: apis/poi/tests/UnitTests
+run: dotnet add package coverlet.msbuild
 
-name: Build and deploy Node.js app to Azure Web App - jobs-trigger
 
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+- name: Install dependencies
+run: dotnet restore apis/poi/web/*.csproj
 
-    steps:
-      - uses: actions/checkout@v2
+- name: .NET Build Web
+run: dotnet build --configuration Release --no-restore apis/poi/web/*.csproj
 
-      - name: Set up Node.js version
-        uses: actions/setup-node@v1
-        with:
-          node-version: 'node:latest'
 
-      - name: npm install, build, and test
-        run: |
-          npm install
-          npm run build --if-present
-          npm run test --if-present
 
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
-        with:
-          name: node-app
-          path: .
+- name: .NET Build Unit Tests
+run: dotnet build --configuration Release apis/poi/tests/UnitTests/UnitTests.csproj
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v2
-        with:
-          name: node-app
 
-      - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'jobs-trigger'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
-          package: .
+- name: .NET Test
+run: dotnet test --no-restore --verbosity normal apis/poi/tests/UnitTests /p:CollectCoverage=true /p:CoverletOutput=lcov/ /p:CoverletOutputFormat=lcov
+
+- name: Coveralls
+uses: coverallsapp/github-action@master
+with:
+github-token: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+path-to-lcov: apis/poi/tests/UnitTests/lcov/coverage.info
+base-path: apis/poi
+flag-name: Unit
