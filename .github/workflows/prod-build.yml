@@ -11,12 +11,8 @@ env:
   resource_group: openhack93o3sbc2rg
 
 on:
-  push:
-    branches: [ main ]
-    paths: [apis/poi/**,.github/workflows/prod-build-dotnetcore.yml]
-  pull_request:
-    branches: [ main ]
-    paths: [apis/poi/**,.github/workflows/prod-build-dotnetcore.yml]
+  push
+    
 jobs:
   build:
 
