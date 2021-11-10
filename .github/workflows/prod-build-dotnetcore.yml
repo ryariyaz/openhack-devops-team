@@ -1,4 +1,4 @@
-name: .NET Core-Build and Test
+name: Riyaz Build
 env:
   registry: openhack93o3sbc2acr.azurecr.io
   registryurl: https://openhack93o3sbc2acr.azurecr.io/
