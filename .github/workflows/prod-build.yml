@@ -64,8 +64,8 @@ jobs:
             body: body
           });
           
-  deploy_staging:
-if: github.ref == 'refs/heads/master'
+deploy_staging:
+if: github.ref == 'refs/heads/main'
 runs-on: ubuntu-latest
 needs: docker_build_and_push
 steps:
