@@ -106,4 +106,24 @@ jobs:
       needs: deploy_staging
       steps:
       - uses: actions/checkout@v2
+      - name: URL Health Check
+      # You may pin to the exact commit or the version.
+      # uses: Jtalk/url-health-check-action@2ff10af730f912a7b51f4e3868d9cb30de170a6b
+        uses: Jtalk/url-health-check-action@v1.3
+        with:
+          # Target URL(s), split by |
+          url: $staging_url
+
+      - uses: actions/github-script@0.9.0
+        if: failure()
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+           let body = "${{ env.build_name }} Worflow Failure \n Build Number: ${{ github.run_number }} \n Build Log: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} \n SHA: [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }}) \n";
+           github.issues.create({
+          owner: context.repo.owner,
+          repo: context.repo.repo,
+          title: "${{ env.build_name }} Workflow ${{ github.run_number }} Failed! ",
+          body: body
+          });
           
