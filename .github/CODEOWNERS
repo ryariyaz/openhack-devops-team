@@ -1,13 +1,15 @@
 # This is a comment.
 # Each line is a file pattern followed by one or more owners.
-
+# Testing Commit to main Branch
 # Basic Code owner template
 # Code Owners for a file
 # filename @username1 @username2
 
 # Code Owners for a directory
-# directoryname/ @username1 @username2
-
+/apis/poi/ @ryariyaz
+/apis/trips/ @mohidem
+/apis/user-java/ @mohidem
+/apis/userprofile/ @@ryariyaz
 # All group members as Code Owners for a file
 # filename @groupname
 
@@ -18,4 +20,5 @@
 # the repo. Unless a later match takes precedence,
 # @ryariyaz and @mohidem will be requested for
 # review when someone opens a pull request.
-*       @mohidem
+
+*       @mohidem @ryariyaz
