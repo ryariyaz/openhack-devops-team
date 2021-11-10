@@ -12,10 +12,10 @@ env:
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths: [apis/poi/**,.github/workflows/prod-build.yml]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
     paths: [apis/poi/**,.github/workflows/prod-build.yml]
 jobs:
   build:
@@ -69,7 +69,7 @@ jobs:
           });
           
   deploy_staging:
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     needs: docker_build_and_push
     steps:
