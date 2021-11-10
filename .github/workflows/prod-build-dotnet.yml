@@ -13,10 +13,10 @@ env:
 on:
   push:
     branches: [ master ]
-    paths: [apis/poi/**,.github/workflows/prod-build-dotnetcore.yml]
+    paths: [apis/poi/**,.github/workflows/prod-build-dotnet.yml]
   pull_request:
     branches: [ master ]
-    paths: [apis/poi/**,.github/workflows/prod-build-dotnetcore.yml]
+    paths: [apis/poi/**,.github/workflows/prod-build-dotnet.yml]
 jobs:
   build:
 
