@@ -10,6 +10,16 @@ env:
   webapp_name: openhack93o3sbc2poi
   build_name: POI
   resource_group: openhack93o3sbc2rg
+  
+  on:
+push:
+branches: [ master ]
+paths: [apis/poi/**,.github/workflows/prod-build-dotnetcore.yml]
+pull_request:
+branches: [ master ]
+paths: [apis/poi/**,.github/workflows/prod-build-dotnetcore.yml]
+jobs:
+build:
 
 
 jobs:
